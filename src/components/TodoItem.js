@@ -1,10 +1,15 @@
 import "./css/TodoItem.css";
 
-const TodoItem = ({ id, content, isDone, createDate }) => {
+const TodoItem = ({ id, content, isDone, createDate, onUpdate }) => {
+  // 체크박스 틱 했을 때 호출 할 함수
+  const onChangeCheckbox = () => {
+    onUpdate(id);
+  };
+
   return (
     <div className="TodoItem">
       <div className="checkbox_col">
-        <input type="checkbox" checked={isDone} />
+        <input checked={isDone} onChange={onChangeCheckbox} type="checkbox" />
       </div>
       <div className="title_col">{content}</div>
       <div className="date_col">{new Date().toLocaleDateString()}</div>

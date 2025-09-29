@@ -2,7 +2,8 @@ import { useState } from "react";
 import "./css/TodoList.css";
 import TodoItem from "./TodoItem";
 
-const TodoList = ({ todo }) => {
+// 2. TodoItem에게 props를 전달하기 위해서 List에다가도 넘겨주기
+const TodoList = ({ todo, onUpdate }) => {
   // 0. 검색 기능 만들기 위해 useState 훅, onChange 함수 이용하기
   const [search, setSearch] = useState("");
   const onChangeSearch = (e) => {
@@ -31,7 +32,7 @@ const TodoList = ({ todo }) => {
 
         {/* 1. 검색어 필터링 함수를 통해서 todo의 값을 가져오기 */}
         {getSearchResult().map((it) => (
-          <TodoItem key={it.id} {...it} />
+          <TodoItem key={it.id} {...it} onUpdate={onUpdate} />
         ))}
       </div>
     </div>
