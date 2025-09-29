@@ -17,6 +17,12 @@
   flex: 1;
 }
 
+/* 같은 요소에 여러 클래스를 동시에 지정하려면 점을 붙여 연달아 써야함 */
+.TodoItem .title_col.done {
+  color: #999;
+  text-decoration: line-through;
+}
+
 /* 할 일 아이템 등록 시간을 감싼 박스에 스타일 적용 */
 .TodoItem .date_col {
   font-size: 14px;

@@ -38,11 +38,17 @@ function App() {
     setTodo(todo.map((it) => (it.id === targetId ? { ...it, isDone: !it.isDone } : it)));
   };
 
+  // 3. 할일삭제함수 (삭제 클릭한 id를 가진 아이템을 제외한 나머지 리스트를 setTodo에 저장)
+  const onDelete = (targetId) => {
+    setTodo(todo.filter((it) => it.id !== targetId));
+  };
+
   return (
     <div className="App">
       <Header />
       <TodoEditor onCreate={onCreate} />
-      <TodoList todo={todo} onUpdate={onUpdate} />
+      {/* TodoItem에게 보내고 싶어도 바로 보낼 수 없기 때문에 TodoList 통해서 보내주기(할머니->엄마->자식) */}
+      <TodoList todo={todo} onUpdate={onUpdate} onDelete={onDelete} />
     </div>
   );
 }
