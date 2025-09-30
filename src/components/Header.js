@@ -1,5 +1,8 @@
 import "./css/Header.css";
+import React from "react";
 
+// 이 컴포넌트는 어떤 상황에서도 리렌더할 필요가 없음
+// React.memo는 컴포넌트가 모든 상황에서 리렌더되지 않도록 강화함으로써 서비스를 최적화하는 도구
 const Header = () => {
   return (
     <div className="Header">
@@ -10,4 +13,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default React.memo(Header);
