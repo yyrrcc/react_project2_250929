@@ -1,8 +1,12 @@
-import { useCallback, useReducer, useRef, useState } from "react";
+import React, { useCallback, useReducer, useRef, useMemo } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import TodoEditor from "./components/TodoEditor";
 import TodoList from "./components/TodoList";
+
+// TodoContext (todo), TodoDispatchContext (dispatch 함수) 나눠주기
+export const TodoStateContext = React.createContext();
+export const TodoDispatchContext = React.createContext();
 
 // useReducer 함수
 function reducer(todo, action) {
@@ -61,12 +65,21 @@ function App() {
   };
    */
 
+  // 5. useMemo를 이용해 TodoDispatchContext.Provider에 전달할 dispatch 함수를 다시 생성하지 않도록 만들기
+  const memoizedDispatches = useMemo(() => {
+    return { onCreate, onUpdate, onDelete };
+  }, []);
+
   return (
     <div className="App">
       <Header />
-      <TodoEditor onCreate={onCreate} />
-      {/* TodoItem에게 보내고 싶어도 바로 보낼 수 없기 때문에 TodoList 통해서 보내주기(할머니->엄마->자식) */}
-      <TodoList todo={todo} onUpdate={onUpdate} onDelete={onDelete} />
+      {/* 데이터 공급해주기 props를 객체로 만들어서.. */}
+      <TodoStateContext.Provider value={todo}>
+        <TodoDispatchContext.Provider value={memoizedDispatches}>
+          <TodoEditor />
+          <TodoList />
+        </TodoDispatchContext.Provider>
+      </TodoStateContext.Provider>
     </div>
   );
 }

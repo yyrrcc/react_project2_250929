@@ -1,8 +1,11 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import "./css/TodoEditor.css";
+import { TodoDispatchContext } from "../App";
 
-// App에서 만든 props 전달 해주기
-const TodoEditor = ({ onCreate }) => {
+// App에서 만든 props 전달 해주기 -> createContext 이용해서 props 받아오기
+const TodoEditor = () => {
+  const { onCreate } = useContext(TodoDispatchContext);
+
   // input의 값 저장 할 변수를 useState 이용해서 만들기
   const [content, setContent] = useState("");
   // validation을 위해 ref값 만들어주기

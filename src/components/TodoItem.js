@@ -1,7 +1,10 @@
 import "./css/TodoItem.css";
-import React from "react";
+import React, { useContext } from "react";
+import { TodoDispatchContext } from "../App";
 
-const TodoItem = ({ id, content, isDone, createDate, onUpdate, onDelete }) => {
+const TodoItem = ({ id, content, isDone, createDate }) => {
+  // 4. createContext 이용해서 props 받아오기
+  const { onUpdate, onDelete } = useContext(TodoDispatchContext);
   console.log(`${id} : todoitem`);
 
   // 2. 체크박스 틱 했을 때 호출 할 함수
@@ -29,5 +32,5 @@ const TodoItem = ({ id, content, isDone, createDate, onUpdate, onDelete }) => {
   );
 };
 
-//export default TodoItem;
+// export default TodoItem;
 export default React.memo(TodoItem);

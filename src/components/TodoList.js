@@ -1,9 +1,13 @@
 import "./css/TodoList.css";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useContext } from "react";
 import TodoItem from "./TodoItem";
+import { TodoStateContext } from "../App";
 
 // 2. TodoItem에게 props를 전달하기 위해서 List에다가도 넘겨주기
-const TodoList = ({ todo, onUpdate, onDelete }) => {
+const TodoList = () => {
+  // 4. createContext 이용해서 props 받아오기
+  const todo = useContext(TodoStateContext);
+
   // 0. 검색 기능 만들기 위해 useState 훅, onChange 함수 이용하기
   const [search, setSearch] = useState("");
   const onChangeSearch = (e) => {
@@ -48,7 +52,7 @@ const TodoList = ({ todo, onUpdate, onDelete }) => {
 
         {/* 1. 검색어 필터링 함수를 통해서 todo의 값을 가져오기 */}
         {getSearchResult().map((it) => (
-          <TodoItem key={it.id} {...it} onUpdate={onUpdate} onDelete={onDelete} />
+          <TodoItem key={it.id} {...it} />
         ))}
       </div>
     </div>
