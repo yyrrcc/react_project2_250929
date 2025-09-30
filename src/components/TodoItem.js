@@ -1,6 +1,9 @@
 import "./css/TodoItem.css";
+import React from "react";
 
 const TodoItem = ({ id, content, isDone, createDate, onUpdate, onDelete }) => {
+  console.log(`${id} : todoitem`);
+
   // 2. 체크박스 틱 했을 때 호출 할 함수
   const onChangeCheckbox = () => {
     onUpdate(id);
@@ -26,4 +29,5 @@ const TodoItem = ({ id, content, isDone, createDate, onUpdate, onDelete }) => {
   );
 };
 
-export default TodoItem;
+//export default TodoItem;
+export default React.memo(TodoItem);

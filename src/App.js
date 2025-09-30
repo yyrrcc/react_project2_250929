@@ -1,4 +1,4 @@
-import { useReducer, useRef, useState } from "react";
+import { useCallback, useReducer, useRef, useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import TodoEditor from "./components/TodoEditor";
@@ -38,6 +38,15 @@ function App() {
     idRef.current += 1;
   };
 
+  // 4. useCallback
+  const onUpdate = useCallback((targetId) => {
+    dispatch({ type: "UPDATE", targetId });
+  }, []);
+  const onDelete = useCallback((targetId) => {
+    dispatch({ type: "DELETE", targetId });
+  }, []);
+
+  /*
   // 2. 할일수정함수 (체크박스에 틱이 발생했을 때의 id값을 매개변수로 받기, 변화된 값을 setTodo로 변경해주기)
   const onUpdate = (targetId) => {
     // 2. map 메서드를 이용해 배열 todo 에서 id가 targetId와 일치하는 요소를 찾으면, isDone 프로퍼티 값을 토글한 새 배열을 만들어 인수로 전달
@@ -50,6 +59,7 @@ function App() {
     dispatch({ type: "DELETE", targetId });
     // setTodo(todo.filter((it) => it.id !== targetId));
   };
+   */
 
   return (
     <div className="App">

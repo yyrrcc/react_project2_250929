@@ -18,7 +18,7 @@ const TodoList = ({ todo, onUpdate, onDelete }) => {
 
   // 3. 할 일 분석 기능 함수 추가 (총 할일 개수, 완료된 일, 완료되지 못한 일) + useMemo
   const analyzeTodo = useMemo(() => {
-    console.log("확인용 : analyzeTodo 호출");
+    console.log("analyzeTodo 호출");
     const totalCount = todo.length;
     const doneCount = todo.filter((it) => it.isDone).length;
     const notDoneCount = totalCount - doneCount;
