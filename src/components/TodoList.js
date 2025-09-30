@@ -1,5 +1,5 @@
-import { useState } from "react";
 import "./css/TodoList.css";
+import { useMemo, useState } from "react";
 import TodoItem from "./TodoItem";
 
 // 2. TodoItem에게 props를 전달하기 위해서 List에다가도 넘겨주기
@@ -16,9 +16,25 @@ const TodoList = ({ todo, onUpdate, onDelete }) => {
     return search === "" ? todo : todo.filter((it) => it.content.toLowerCase().includes(search.toLocaleLowerCase()));
   };
 
+  // 3. 할 일 분석 기능 함수 추가 (총 할일 개수, 완료된 일, 완료되지 못한 일) + useMemo
+  const analyzeTodo = useMemo(() => {
+    console.log("확인용 : analyzeTodo 호출");
+    const totalCount = todo.length;
+    const doneCount = todo.filter((it) => it.isDone).length;
+    const notDoneCount = totalCount - doneCount;
+    return { totalCount, doneCount, notDoneCount };
+  }, [todo]);
+  // 3. 함수로 반환하는 값을 받기 + useMemo 사용하면서 함수가 아닌 변수가 되었음
+  const { totalCount, doneCount, notDoneCount } = analyzeTodo;
+
   return (
     <div className="TodoList">
       <h4>Todo List 🌱</h4>
+      <div>
+        <div>총 개수: {totalCount}</div>
+        <div>완료됨 : {doneCount}</div>
+        <div>해야 할 일: {notDoneCount}</div>
+      </div>
       <input className="searchbar" value={search} onChange={onChangeSearch} placeholder="검색어를 입력하세요" />
       <div className="list_wrapper">
         {/* 0. TodoItem을 반복해서 값 찍어주기 (배열 데이터를 렌더링할 때는 배열 메서드 map을 주로 이용)

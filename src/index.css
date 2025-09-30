@@ -1,12 +1,12 @@
 @font-face {
-  font-family: "Presentation";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-7Bold.woff2") format("woff2");
+  font-family: "BookkMyungjo";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/BookkMyungjo-Bd.woff2") format("woff2");
   font-weight: 700;
   font-display: swap;
 }
 
 body {
   margin: 0;
-  font-family: "Presentation";
-  font-size: 18px;
+  font-family: "BookkMyungjo";
+  font-size: 16px;
 }

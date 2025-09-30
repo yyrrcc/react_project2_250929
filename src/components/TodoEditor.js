@@ -23,6 +23,7 @@ const TodoEditor = ({ onCreate }) => {
     }
     onCreate(content);
     setContent(""); // 제출 후 입력 폼 초기화
+    inputRef.current.focus();
   };
 
   // 키보드 Enter 키로도 제출할 수 있게 만들어주기
